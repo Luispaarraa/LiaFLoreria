@@ -3,8 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Luis</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Dancing+Script:wght@600;700&family=Montserrat:wght@200;300;400&display=swap" rel="stylesheet">
+<title>Lia Florería y Eventos · Hermosillo</title>
+<meta name="description" content="Florería y decoración de eventos en Hermosillo, Sonora. Bouquets, bodas, quinceañeras y más. Envíos a domicilio.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Dancing+Script:wght@600;700&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
     --black: #0a0a0a;
@@ -21,9 +22,7 @@
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   html { scroll-behavior: smooth; }
-
   body {
     background: var(--black);
     color: var(--text);
@@ -32,7 +31,7 @@
     cursor: none;
   }
 
-  /* Custom cursor */
+  /* ─── CURSOR ─── */
   .cursor {
     width: 12px; height: 12px;
     background: var(--pink);
@@ -40,7 +39,6 @@
     position: fixed; top: 0; left: 0;
     pointer-events: none; z-index: 9999;
     transform: translate(-50%,-50%);
-    transition: transform 0.1s ease, width 0.3s, height 0.3s, background 0.3s;
     mix-blend-mode: screen;
   }
   .cursor-ring {
@@ -59,14 +57,18 @@
     position: fixed; top: 0; width: 100%; z-index: 100;
     display: flex; align-items: center; justify-content: space-between;
     padding: 1.5rem 4rem;
-    background: linear-gradient(to bottom, rgba(10,10,10,0.95) 0%, transparent 100%);
-    backdrop-filter: blur(4px);
+    transition: all 0.4s;
+  }
+  nav.scrolled {
+    background: rgba(10,10,10,0.96);
+    backdrop-filter: blur(12px);
+    padding: 1rem 4rem;
+    border-bottom: 1px solid var(--border);
   }
   .nav-logo {
     font-family: 'Dancing Script', cursive;
     font-size: 2rem;
     color: var(--pink-light);
-    letter-spacing: 0.05em;
     text-decoration: none;
   }
   .nav-links { display: flex; gap: 2.5rem; list-style: none; }
@@ -82,6 +84,48 @@
   }
   .nav-links a:hover { color: var(--pink-light); }
 
+  /* ─── WHATSAPP FLOATING ─── */
+  .wa-float {
+    position: fixed;
+    bottom: 2rem; right: 2rem;
+    z-index: 200;
+    width: 56px; height: 56px;
+    background: #25D366;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+    text-decoration: none;
+    transition: all 0.3s;
+    animation: waPulse 2.5s infinite;
+  }
+  .wa-float:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 28px rgba(37,211,102,0.5);
+    animation: none;
+  }
+  .wa-float svg { width: 28px; height: 28px; }
+  @keyframes waPulse {
+    0%,100% { box-shadow: 0 4px 20px rgba(37,211,102,0.4); }
+    50% { box-shadow: 0 4px 30px rgba(37,211,102,0.7); }
+  }
+  .wa-tooltip {
+    position: absolute;
+    right: 68px;
+    white-space: nowrap;
+    background: rgba(10,10,10,0.9);
+    color: var(--text);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    padding: 0.5rem 0.8rem;
+    border: 1px solid var(--border);
+    opacity: 0;
+    transform: translateX(8px);
+    transition: all 0.3s;
+    pointer-events: none;
+  }
+  .wa-float:hover .wa-tooltip { opacity: 1; transform: translateX(0); }
+
   /* ─── HERO ─── */
   .hero {
     height: 100vh;
@@ -92,14 +136,11 @@
   .hero-bg {
     position: absolute; inset: 0;
     background:
-      radial-gradient(ellipse 60% 80% at 70% 50%, rgba(169, 84, 126, 0.12) 0%, transparent 70%),
-      radial-gradient(ellipse 40% 40% at 20% 80%, rgba(201, 123, 168, 0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 80% at 70% 50%, rgba(169,84,126,0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 20% 80%, rgba(201,123,168,0.08) 0%, transparent 60%),
       var(--black);
   }
-  .hero-petals {
-    position: absolute; inset: 0; pointer-events: none;
-    overflow: hidden;
-  }
+  .hero-petals { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
   .petal {
     position: absolute;
     width: var(--size);
@@ -118,7 +159,6 @@
     90%  { opacity: 0.15; }
     100% { transform: translateY(110vh) rotate(calc(var(--rot) + 180deg)) scale(0.6); opacity: 0; }
   }
-
   .hero-content {
     position: relative; z-index: 2;
     text-align: center;
@@ -147,8 +187,7 @@
     -webkit-background-clip: text;
     background-clip: text;
     animation: fadeUp 1.2s 0.7s both ease;
-    text-shadow: none;
-    filter: drop-shadow(0 0 40px rgba(201, 123, 168, 0.4));
+    filter: drop-shadow(0 0 40px rgba(201,123,168,0.4));
   }
   .hero-tagline {
     font-family: 'Montserrat', sans-serif;
@@ -190,7 +229,6 @@
   .hero-cta:hover::before { opacity: 1; }
   .hero-cta:hover { color: var(--black); border-color: transparent; }
   .hero-cta span { position: relative; z-index: 1; }
-
   .scroll-hint {
     position: absolute; bottom: 2.5rem; left: 50%;
     transform: translateX(-50%);
@@ -268,26 +306,16 @@
     display: flex; align-items: center; justify-content: center;
     transition: all 0.3s;
   }
-  .ctrl-btn:hover {
-    background: var(--pink-deep);
-    border-color: var(--pink-deep);
-    color: var(--black);
-  }
-
+  .ctrl-btn:hover { background: var(--pink-deep); border-color: var(--pink-deep); color: var(--black); }
   .carousel-track-wrap { overflow: hidden; padding: 1rem 0 2rem; }
   .carousel-track {
     display: flex;
     gap: 1.5rem;
     padding: 0 4rem;
-    transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1);
+    transition: transform 0.6s cubic-bezier(0.77,0,0.175,1);
     will-change: transform;
   }
-  .carousel-slide {
-    flex: 0 0 380px;
-    position: relative;
-    cursor: pointer;
-    group: '';
-  }
+  .carousel-slide { flex: 0 0 380px; position: relative; cursor: pointer; }
   .slide-img-wrap {
     position: relative;
     height: 480px;
@@ -297,33 +325,18 @@
   .slide-img-wrap::after {
     content: '';
     position: absolute; inset: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 50%);
+    background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 55%);
     transition: opacity 0.4s;
-    opacity: 0.5;
+    opacity: 0.6;
+    z-index: 1;
   }
-  .carousel-slide:hover .slide-img-wrap::after { opacity: 0.8; }
-
-  /* Placeholder flower illustrations */
-  .slide-placeholder {
+  .carousel-slide:hover .slide-img-wrap::after { opacity: 0.85; }
+  .slide-img {
     width: 100%; height: 100%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 5rem;
-    background: var(--card);
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
   }
-  .carousel-slide:hover .slide-placeholder { transform: scale(1.04); }
-
-  /* Each slide gets a unique gradient background */
-  .s1 { background: radial-gradient(ellipse at 40% 30%, #2a0f1e 0%, #0e0a0c 80%); }
-  .s2 { background: radial-gradient(ellipse at 60% 70%, #1e0a18 0%, #0e0a0c 80%); }
-  .s3 { background: radial-gradient(ellipse at 30% 60%, #220d1a 0%, #0e0a0c 80%); }
-  .s4 { background: radial-gradient(ellipse at 70% 30%, #1a0f20 0%, #0e0a0c 80%); }
-  .s5 { background: radial-gradient(ellipse at 50% 50%, #2a1020 0%, #0e0a0c 80%); }
-
-  .slide-svg { width: 220px; height: 220px; opacity: 0.85; }
-
+  .carousel-slide:hover .slide-img { transform: scale(1.05); }
   .slide-info {
     position: absolute; bottom: 0; left: 0; right: 0;
     padding: 1.8rem;
@@ -346,27 +359,54 @@
     font-style: italic;
     color: var(--blush);
   }
-
-  /* Dots */
-  .carousel-dots {
-    display: flex; justify-content: center; gap: 0.5rem;
-    margin-top: 2rem;
-  }
-  .dot {
-    width: 20px; height: 2px;
-    background: var(--muted);
-    cursor: pointer;
-    transition: all 0.3s;
-  }
+  .carousel-dots { display: flex; justify-content: center; gap: 0.5rem; margin-top: 2rem; }
+  .dot { width: 20px; height: 2px; background: var(--muted); cursor: pointer; transition: all 0.3s; }
   .dot.active { width: 40px; background: var(--pink); }
+
+  /* ─── LIGHTBOX ─── */
+  .lightbox {
+    position: fixed; inset: 0; z-index: 500;
+    background: rgba(5,3,4,0.96);
+    display: none; align-items: center; justify-content: center;
+    backdrop-filter: blur(8px);
+  }
+  .lightbox.open { display: flex; }
+  .lightbox-img {
+    max-width: 85vw;
+    max-height: 85vh;
+    object-fit: contain;
+    border: 1px solid var(--border);
+    animation: lbIn 0.3s ease;
+  }
+  @keyframes lbIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+  .lightbox-close {
+    position: absolute; top: 2rem; right: 2rem;
+    background: transparent; border: 1px solid var(--border);
+    color: var(--pink-light); font-size: 1.5rem;
+    width: 44px; height: 44px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; transition: all 0.3s;
+  }
+  .lightbox-close:hover { background: var(--pink-deep); border-color: var(--pink-deep); color: var(--black); }
+  .lightbox-caption {
+    position: absolute; bottom: 2rem; left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--blush);
+    letter-spacing: 0.05em;
+  }
 
   /* ─── SERVICES ─── */
   .services {
     background: var(--black);
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 0;
-    padding: 0;
+    gap: 0; padding: 0;
   }
   .services-left {
     padding: 8rem 5rem;
@@ -382,42 +422,120 @@
     border-bottom: 1px solid var(--border);
     border-right: 1px solid var(--border);
     transition: background 0.4s;
-    position: relative;
-    overflow: hidden;
+    position: relative; overflow: hidden;
   }
   .service-card::before {
     content: '';
     position: absolute; inset: 0;
     background: linear-gradient(135deg, rgba(201,123,168,0.05), transparent);
-    opacity: 0;
-    transition: opacity 0.4s;
+    opacity: 0; transition: opacity 0.4s;
   }
   .service-card:hover::before { opacity: 1; }
   .service-card:nth-child(2) { border-right: none; }
   .service-card:nth-child(3) { border-bottom: none; }
   .service-card:nth-child(4) { border-right: none; border-bottom: none; }
-
-  .service-icon {
-    font-size: 1.8rem;
-    margin-bottom: 1.2rem;
-    display: block;
-  }
+  .service-icon { font-size: 1.8rem; margin-bottom: 1.2rem; display: block; }
   .service-name {
     font-family: 'Playfair Display', serif;
-    font-size: 1.15rem;
+    font-size: 1.15rem; font-style: italic;
+    color: var(--blush); margin-bottom: 0.7rem;
+  }
+  .service-desc { font-size: 0.9rem; line-height: 1.8; color: var(--muted); font-weight: 300; }
+
+  /* ─── PACKAGES ─── */
+  .packages { background: var(--deep); }
+  .packages-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 4rem;
+  }
+  .pkg-card {
+    border: 1px solid var(--border);
+    padding: 2.5rem;
+    position: relative;
+    transition: border-color 0.4s, transform 0.3s;
+    background: rgba(255,255,255,0.01);
+  }
+  .pkg-card:hover { border-color: var(--pink); transform: translateY(-6px); }
+  .pkg-card.featured {
+    border-color: var(--pink-deep);
+    background: rgba(160,84,126,0.05);
+  }
+  .pkg-badge {
+    position: absolute; top: -1px; left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, var(--pink-deep), var(--rose));
+    color: var(--black);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.58rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 0.35rem 1.2rem;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .pkg-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
     font-style: italic;
     color: var(--blush);
-    margin-bottom: 0.7rem;
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
   }
-  .service-desc {
-    font-size: 0.9rem;
-    line-height: 1.8;
+  .pkg-price {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.5rem;
+    color: var(--pink);
+    line-height: 1;
+    margin-bottom: 1.5rem;
+  }
+  .pkg-price span {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.75rem;
     color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+  .pkg-features { list-style: none; margin-bottom: 2rem; }
+  .pkg-features li {
+    font-size: 0.9rem;
+    color: var(--muted);
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(201,123,168,0.08);
+    display: flex; align-items: center; gap: 0.6rem;
     font-weight: 300;
+  }
+  .pkg-features li::before {
+    content: '';
+    display: block;
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--pink-deep);
+    flex-shrink: 0;
+  }
+  .pkg-btn {
+    display: block; width: 100%;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 0.9rem;
+    text-align: center;
+    text-decoration: none;
+    border: 1px solid var(--pink-deep);
+    color: var(--pink-light);
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .pkg-btn:hover, .pkg-card.featured .pkg-btn {
+    background: linear-gradient(135deg, var(--pink-deep), var(--rose));
+    color: var(--black);
+    border-color: transparent;
   }
 
   /* ─── OCCASIONS ─── */
-  .occasions { background: var(--deep); }
+  .occasions { background: var(--black); }
   .occasions-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -427,30 +545,72 @@
     border: 1px solid var(--border);
   }
   .occ-card {
-    background: var(--deep);
+    background: var(--black);
     padding: 3rem 2.5rem;
     text-align: center;
     transition: background 0.4s, transform 0.3s;
     cursor: default;
   }
-  .occ-card:hover {
-    background: rgba(22,16,18,1);
-    transform: translateY(-4px);
-  }
+  .occ-card:hover { background: rgba(22,16,18,1); transform: translateY(-4px); }
   .occ-emoji { font-size: 2.5rem; margin-bottom: 1rem; display: block; }
   .occ-name {
     font-family: 'Playfair Display', serif;
-    font-size: 1.1rem;
-    font-style: italic;
-    color: var(--pink-light);
-    margin-bottom: 0.6rem;
+    font-size: 1.1rem; font-style: italic;
+    color: var(--pink-light); margin-bottom: 0.6rem;
   }
   .occ-sub {
     font-family: 'Montserrat', sans-serif;
-    font-size: 0.65rem;
-    letter-spacing: 0.15em;
+    font-size: 0.65rem; letter-spacing: 0.15em;
+    color: var(--muted); text-transform: uppercase;
+  }
+
+  /* ─── TESTIMONIALS ─── */
+  .testimonials { background: var(--deep); }
+  .testi-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 4rem;
+  }
+  .testi-card {
+    border: 1px solid var(--border);
+    padding: 2.2rem;
+    background: rgba(255,255,255,0.01);
+    position: relative;
+    transition: border-color 0.3s;
+  }
+  .testi-card:hover { border-color: rgba(201,123,168,0.4); }
+  .testi-quote {
+    font-family: 'Dancing Script', cursive;
+    font-size: 4rem;
+    color: var(--pink-deep);
+    line-height: 0.5;
+    margin-bottom: 1rem;
+    opacity: 0.6;
+  }
+  .testi-text {
+    font-size: 1rem;
+    line-height: 1.9;
     color: var(--muted);
+    font-weight: 300;
+    font-style: italic;
+    margin-bottom: 1.5rem;
+  }
+  .testi-stars { color: var(--pink); font-size: 0.85rem; margin-bottom: 1rem; letter-spacing: 0.1em; }
+  .testi-name {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
+    color: var(--pink-light);
+  }
+  .testi-occasion {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 0.2rem;
   }
 
   /* ─── ABOUT ─── */
@@ -461,10 +621,7 @@
     align-items: center;
     gap: 6rem;
   }
-  .about-visual {
-    position: relative;
-    height: 500px;
-  }
+  .about-visual { position: relative; height: 500px; }
   .about-ring {
     position: absolute;
     border-radius: 50%;
@@ -492,20 +649,11 @@
     padding-top: 2.5rem;
     border-top: 1px solid var(--border);
   }
-  .stat-num {
-    font-family: 'Dancing Script', cursive;
-    font-size: 3rem;
-    color: var(--pink);
-    display: block;
-    line-height: 1;
-  }
+  .stat-num { font-family: 'Dancing Script', cursive; font-size: 3rem; color: var(--pink); display: block; line-height: 1; }
   .stat-label {
     font-family: 'Montserrat', sans-serif;
-    font-size: 0.62rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-top: 0.3rem;
+    font-size: 0.62rem; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--muted); margin-top: 0.3rem;
   }
 
   /* ─── CTA BANNER ─── */
@@ -549,12 +697,9 @@
     padding: 1rem 2.8rem;
     background: linear-gradient(135deg, var(--pink-deep), var(--rose));
     color: var(--black);
-    border: none;
-    cursor: pointer;
-    text-decoration: none;
-    display: inline-block;
-    transition: all 0.3s;
-    font-weight: 500;
+    border: none; cursor: pointer;
+    text-decoration: none; display: inline-block;
+    transition: all 0.3s; font-weight: 500;
   }
   .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(160,84,126,0.3); }
   .btn-secondary {
@@ -566,10 +711,8 @@
     background: transparent;
     color: var(--pink-light);
     border: 1px solid var(--pink-deep);
-    cursor: pointer;
-    text-decoration: none;
-    display: inline-block;
-    transition: all 0.3s;
+    cursor: pointer; text-decoration: none;
+    display: inline-block; transition: all 0.3s;
   }
   .btn-secondary:hover { background: rgba(201,123,168,0.1); }
 
@@ -583,42 +726,29 @@
   .contact-info { display: flex; flex-direction: column; justify-content: center; }
   .contact-item {
     display: flex; align-items: flex-start; gap: 1.2rem;
-    margin-bottom: 2rem;
-    padding-bottom: 2rem;
+    margin-bottom: 2rem; padding-bottom: 2rem;
     border-bottom: 1px solid var(--border);
   }
   .contact-item:last-child { border-bottom: none; }
   .contact-icon { font-size: 1.1rem; color: var(--pink); margin-top: 2px; }
   .contact-detail-label {
     font-family: 'Montserrat', sans-serif;
-    font-size: 0.6rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--pink);
-    margin-bottom: 0.3rem;
+    font-size: 0.6rem; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--pink); margin-bottom: 0.3rem;
   }
-  .contact-detail-val {
-    font-size: 1rem;
-    color: var(--text);
-    line-height: 1.6;
-  }
+  .contact-detail-val { font-size: 1rem; color: var(--text); line-height: 1.6; }
   .contact-form { padding: 3rem; background: rgba(255,255,255,0.02); border: 1px solid var(--border); }
   .form-title {
     font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
-    font-style: italic;
-    color: var(--blush);
-    margin-bottom: 2rem;
+    font-size: 1.5rem; font-style: italic;
+    color: var(--blush); margin-bottom: 2rem;
   }
   .form-row { margin-bottom: 1.5rem; }
   .form-row label {
     display: block;
     font-family: 'Montserrat', sans-serif;
-    font-size: 0.62rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 0.5rem;
+    font-size: 0.62rem; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem;
   }
   .form-row input, .form-row textarea, .form-row select {
     width: 100%;
@@ -633,10 +763,27 @@
     resize: none;
     appearance: none;
   }
-  .form-row input:focus, .form-row textarea:focus, .form-row select:focus {
-    border-color: var(--pink);
-  }
+  .form-row input:focus, .form-row textarea:focus, .form-row select:focus { border-color: var(--pink); }
   .form-row select option { background: var(--deep); }
+  .form-row input.error, .form-row textarea.error, .form-row select.error { border-color: #d4687e; }
+  .form-error-msg {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.6rem; letter-spacing: 0.1em;
+    color: var(--rose); margin-top: 0.3rem;
+    display: none;
+  }
+  .form-error-msg.show { display: block; }
+
+  /* ─── MAP ─── */
+  .map-section { background: var(--black); padding: 0; }
+  .map-section iframe {
+    width: 100%; height: 380px;
+    border: none;
+    filter: grayscale(100%) invert(90%) sepia(20%) saturate(300%) hue-rotate(290deg);
+    opacity: 0.7;
+    transition: opacity 0.3s;
+  }
+  .map-section iframe:hover { opacity: 1; }
 
   /* ─── FOOTER ─── */
   footer {
@@ -647,36 +794,51 @@
   }
   .footer-logo {
     font-family: 'Dancing Script', cursive;
-    font-size: 1.8rem;
-    color: var(--pink-light);
+    font-size: 1.8rem; color: var(--pink-light);
     text-decoration: none;
   }
   .footer-copy {
     font-family: 'Montserrat', sans-serif;
-    font-size: 0.62rem;
-    letter-spacing: 0.15em;
-    color: var(--muted);
-    text-transform: uppercase;
+    font-size: 0.62rem; letter-spacing: 0.15em;
+    color: var(--muted); text-transform: uppercase;
   }
   .footer-socials { display: flex; gap: 1rem; }
   .soc-btn {
     width: 36px; height: 36px;
     border: 1px solid var(--border);
     display: flex; align-items: center; justify-content: center;
-    font-size: 0.8rem;
-    color: var(--muted);
-    text-decoration: none;
-    transition: all 0.3s;
+    font-size: 0.8rem; color: var(--muted);
+    text-decoration: none; transition: all 0.3s;
   }
   .soc-btn:hover { border-color: var(--pink); color: var(--pink); }
 
-  /* ─── FADE IN OBSERVER ─── */
+  /* ─── TOAST ─── */
+  .toast {
+    position: fixed; bottom: 6rem; left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: rgba(22,16,18,0.95);
+    border: 1px solid var(--pink-deep);
+    color: var(--blush);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    padding: 1rem 2rem;
+    z-index: 300;
+    opacity: 0;
+    transition: all 0.4s;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  /* ─── FADE IN ─── */
   .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
   .fade-in.visible { opacity: 1; transform: translateY(0); }
 
-  /* Responsive */
+  /* ─── RESPONSIVE ─── */
   @media (max-width: 900px) {
     nav { padding: 1.2rem 2rem; }
+    nav.scrolled { padding: 0.8rem 2rem; }
     .nav-links { display: none; }
     section { padding: 5rem 2rem; }
     .services { grid-template-columns: 1fr; }
@@ -684,12 +846,18 @@
     .about { grid-template-columns: 1fr; padding: 5rem 2rem; }
     .about-visual { height: 300px; }
     .contact { grid-template-columns: 1fr; padding: 5rem 2rem; }
-    .occasions-grid { grid-template-columns: 1fr 1fr; }
+    .occasions-grid, .testi-grid, .packages-grid { grid-template-columns: 1fr 1fr; }
     footer { flex-direction: column; gap: 1.5rem; text-align: center; }
     .carousel-slide { flex: 0 0 280px; }
     .slide-img-wrap { height: 360px; }
     .carousel-header { padding: 0 2rem; }
     .carousel-track { padding: 0 2rem; }
+    .cta-actions { flex-direction: column; align-items: center; }
+  }
+  @media (max-width: 600px) {
+    .occasions-grid, .testi-grid, .packages-grid { grid-template-columns: 1fr; }
+    .services-right { grid-template-columns: 1fr; }
+    .about-stats { flex-wrap: wrap; gap: 1.5rem; }
   }
 </style>
 </head>
@@ -699,12 +867,31 @@
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
 
+<!-- WhatsApp Floating Button -->
+<a href="https://wa.me/526620000000?text=Hola%20Lia%2C%20me%20gustar%C3%ADa%20informaci%C3%B3n%20sobre%20sus%20servicios%20florales%20%F0%9F%8C%B8" class="wa-float" target="_blank" rel="noopener" title="WhatsApp">
+  <div class="wa-tooltip">¡Escríbenos!</div>
+  <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<!-- Toast -->
+<div class="toast" id="toast">✨ ¡Mensaje enviado! Te contactamos pronto.</div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lbClose">✕</button>
+  <img class="lightbox-img" id="lbImg" src="" alt="">
+  <div class="lightbox-caption" id="lbCaption"></div>
+</div>
+
 <!-- NAV -->
-<nav>
+<nav id="navbar">
   <a href="#" class="nav-logo">Lia</a>
   <ul class="nav-links">
     <li><a href="#galeria">Galería</a></li>
     <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#paquetes">Paquetes</a></li>
     <li><a href="#ocasiones">Ocasiones</a></li>
     <li><a href="#nosotros">Nosotros</a></li>
     <li><a href="#contacto">Contacto</a></li>
@@ -716,7 +903,7 @@
   <div class="hero-bg"></div>
   <div class="hero-petals" id="petals"></div>
   <div class="hero-content">
-    <p class="hero-sub">Florería &amp; Eventos</p>
+    <p class="hero-sub">Florería &amp; Eventos · Hermosillo</p>
     <h1 class="hero-title">Lia</h1>
     <p class="hero-tagline">Flores para toda ocasión</p>
     <div class="hero-divider"></div>
@@ -728,7 +915,7 @@
   </div>
 </section>
 
-<!-- CAROUSEL -->
+<!-- CAROUSEL / GALERÍA -->
 <div class="carousel-section" id="galeria">
   <div class="carousel-header">
     <div>
@@ -743,26 +930,9 @@
   <div class="carousel-track-wrap">
     <div class="carousel-track" id="carouselTrack">
 
-      <!-- Slide 1 -->
-      <div class="carousel-slide">
+      <div class="carousel-slide" data-title="Rosa Romántica">
         <div class="slide-img-wrap">
-          <div class="slide-placeholder s1">
-            <svg class="slide-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-              <g opacity="0.9">
-                <ellipse cx="100" cy="55" rx="18" ry="38" fill="#d4a0c0" transform="rotate(0 100 100)"/>
-                <ellipse cx="100" cy="55" rx="18" ry="38" fill="#c080a8" transform="rotate(40 100 100)"/>
-                <ellipse cx="100" cy="55" rx="18" ry="38" fill="#d4a0c0" transform="rotate(80 100 100)"/>
-                <ellipse cx="100" cy="55" rx="18" ry="38" fill="#c080a8" transform="rotate(120 100 100)"/>
-                <ellipse cx="100" cy="55" rx="18" ry="38" fill="#d4a0c0" transform="rotate(160 100 100)"/>
-                <ellipse cx="100" cy="55" rx="18" ry="38" fill="#c080a8" transform="rotate(200 100 100)"/>
-                <ellipse cx="100" cy="55" rx="18" ry="38" fill="#d4a0c0" transform="rotate(240 100 100)"/>
-                <ellipse cx="100" cy="55" rx="18" ry="38" fill="#c080a8" transform="rotate(280 100 100)"/>
-                <circle cx="100" cy="100" r="20" fill="#f0c8d8"/>
-                <circle cx="100" cy="100" r="14" fill="#e8a0bf"/>
-                <circle cx="100" cy="100" r="8" fill="#c07090"/>
-              </g>
-            </svg>
-          </div>
+          <img class="slide-img" src="https://images.unsplash.com/photo-1487530811015-780869de17a5?w=800&q=80" alt="Rosa Romántica" loading="lazy">
         </div>
         <div class="slide-info">
           <p class="slide-cat">Bouquets</p>
@@ -770,52 +940,19 @@
         </div>
       </div>
 
-      <!-- Slide 2 -->
-      <div class="carousel-slide">
+      <div class="carousel-slide" data-title="Arreglo Primaveral">
         <div class="slide-img-wrap">
-          <div class="slide-placeholder s2">
-            <svg class="slide-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-              <!-- Daisy style -->
-              <g>
-                <line x1="100" y1="100" x2="100" y2="50" stroke="#e0b0d0" stroke-width="3"/>
-                <line x1="100" y1="100" x2="141" y2="71" stroke="#e0b0d0" stroke-width="3"/>
-                <line x1="100" y1="100" x2="150" y2="115" stroke="#e0b0d0" stroke-width="3"/>
-                <line x1="100" y1="100" x2="129" y2="154" stroke="#e0b0d0" stroke-width="3"/>
-                <line x1="100" y1="100" x2="71" y2="154" stroke="#e0b0d0" stroke-width="3"/>
-                <line x1="100" y1="100" x2="50" y2="115" stroke="#e0b0d0" stroke-width="3"/>
-                <line x1="100" y1="100" x2="59" y2="71" stroke="#e0b0d0" stroke-width="3"/>
-                <ellipse cx="100" cy="68" rx="10" ry="18" fill="#e8c0d8" transform="rotate(0 100 100)"/>
-                <ellipse cx="100" cy="68" rx="10" ry="18" fill="#d8a8c8" transform="rotate(51 100 100)"/>
-                <ellipse cx="100" cy="68" rx="10" ry="18" fill="#e8c0d8" transform="rotate(102 100 100)"/>
-                <ellipse cx="100" cy="68" rx="10" ry="18" fill="#d8a8c8" transform="rotate(153 100 100)"/>
-                <ellipse cx="100" cy="68" rx="10" ry="18" fill="#e8c0d8" transform="rotate(204 100 100)"/>
-                <ellipse cx="100" cy="68" rx="10" ry="18" fill="#d8a8c8" transform="rotate(255 100 100)"/>
-                <ellipse cx="100" cy="68" rx="10" ry="18" fill="#e8c0d8" transform="rotate(306 100 100)"/>
-                <circle cx="100" cy="100" r="16" fill="#c8905c"/>
-                <circle cx="100" cy="100" r="10" fill="#b07840"/>
-              </g>
-            </svg>
-          </div>
+          <img class="slide-img" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80" alt="Arreglo Primaveral" loading="lazy">
         </div>
         <div class="slide-info">
           <p class="slide-cat">Arreglos</p>
-          <h3 class="slide-title">Margaritas Silvestres</h3>
+          <h3 class="slide-title">Arreglo Primaveral</h3>
         </div>
       </div>
 
-      <!-- Slide 3 -->
-      <div class="carousel-slide">
+      <div class="carousel-slide" data-title="Tulipanes de Temporada">
         <div class="slide-img-wrap">
-          <div class="slide-placeholder s3">
-            <svg class="slide-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-              <!-- Tulip -->
-              <path d="M100 150 Q80 130 75 110 Q70 88 80 70 Q90 52 100 50 Q110 52 120 70 Q130 88 125 110 Q120 130 100 150Z" fill="#c87898" opacity="0.9"/>
-              <path d="M100 150 Q105 130 108 110 Q112 88 108 70 Q104 56 100 50 Q100 50 100 150Z" fill="#a05878" opacity="0.7"/>
-              <line x1="100" y1="150" x2="100" y2="185" stroke="#6a9060" stroke-width="3"/>
-              <path d="M100 168 Q82 155 78 140" stroke="#6a9060" stroke-width="2.5" fill="none"/>
-              <ellipse cx="80" cy="137" rx="12" ry="6" fill="#7ab070" transform="rotate(-30 80 137)"/>
-            </svg>
-          </div>
+          <img class="slide-img" src="https://images.unsplash.com/photo-1490750967868-88df5691cc24?w=800&q=80" alt="Tulipanes" loading="lazy">
         </div>
         <div class="slide-info">
           <p class="slide-cat">Decoración</p>
@@ -823,50 +960,9 @@
         </div>
       </div>
 
-      <!-- Slide 4 -->
-      <div class="carousel-slide">
+      <div class="carousel-slide" data-title="Bouquet Nupcial">
         <div class="slide-img-wrap">
-          <div class="slide-placeholder s4">
-            <svg class="slide-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-              <!-- Wedding bouquet -->
-              <circle cx="100" cy="90" r="48" fill="none" stroke="#d8a0c0" stroke-width="1" stroke-dasharray="4 3"/>
-              <circle cx="100" cy="90" r="35" fill="none" stroke="#c880a8" stroke-width="1" stroke-dasharray="3 4"/>
-              <!-- Small flowers -->
-              <g transform="translate(100,90)">
-                <g transform="translate(-20,-20)">
-                  <circle cx="0" cy="0" r="10" fill="#e0b0cc"/>
-                  <circle cx="0" cy="-10" r="5" fill="#f0c8d8"/>
-                  <circle cx="8.7" cy="-5" r="5" fill="#f0c8d8"/>
-                  <circle cx="8.7" cy="5" r="5" fill="#e8b8d0"/>
-                  <circle cx="0" cy="10" r="5" fill="#f0c8d8"/>
-                  <circle cx="-8.7" cy="5" r="5" fill="#e8b8d0"/>
-                  <circle cx="-8.7" cy="-5" r="5" fill="#f0c8d8"/>
-                  <circle cx="0" cy="0" r="5" fill="#c07890"/>
-                </g>
-                <g transform="translate(20,-15)">
-                  <circle cx="0" cy="-8" r="4" fill="#d4a0c0"/>
-                  <circle cx="6.9" cy="-4" r="4" fill="#e0b0d0"/>
-                  <circle cx="6.9" cy="4" r="4" fill="#d4a0c0"/>
-                  <circle cx="0" cy="8" r="4" fill="#e0b0d0"/>
-                  <circle cx="-6.9" cy="4" r="4" fill="#d4a0c0"/>
-                  <circle cx="-6.9" cy="-4" r="4" fill="#e0b0d0"/>
-                  <circle cx="0" cy="0" r="5" fill="#b86888"/>
-                </g>
-                <g transform="translate(-5,22)">
-                  <circle cx="0" cy="-7" r="3.5" fill="#e8c0d4"/>
-                  <circle cx="6" cy="-3.5" r="3.5" fill="#dca8c0"/>
-                  <circle cx="6" cy="3.5" r="3.5" fill="#e8c0d4"/>
-                  <circle cx="0" cy="7" r="3.5" fill="#dca8c0"/>
-                  <circle cx="-6" cy="3.5" r="3.5" fill="#e8c0d4"/>
-                  <circle cx="-6" cy="-3.5" r="3.5" fill="#dca8c0"/>
-                  <circle cx="0" cy="0" r="4" fill="#a86080"/>
-                </g>
-              </g>
-              <rect x="90" y="130" width="4" height="30" fill="#c8a0b8" rx="2"/>
-              <rect x="106" y="132" width="4" height="28" fill="#c8a0b8" rx="2"/>
-              <path d="M88 150 Q100 165 112 150" stroke="#f0d0e0" stroke-width="1.5" fill="none"/>
-            </svg>
-          </div>
+          <img class="slide-img" src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&q=80" alt="Bouquet Nupcial" loading="lazy">
         </div>
         <div class="slide-info">
           <p class="slide-cat">Bodas</p>
@@ -874,30 +970,9 @@
         </div>
       </div>
 
-      <!-- Slide 5 -->
-      <div class="carousel-slide">
+      <div class="carousel-slide" data-title="Flores Exóticas">
         <div class="slide-img-wrap">
-          <div class="slide-placeholder s5">
-            <svg class="slide-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-              <!-- Cactus flower style / exotic -->
-              <ellipse cx="100" cy="100" rx="42" ry="42" fill="none" stroke="#b8788a" stroke-width="1"/>
-              <g>
-                <ellipse cx="100" cy="58" rx="14" ry="28" fill="#d498b0" opacity="0.85"/>
-                <ellipse cx="100" cy="58" rx="14" ry="28" fill="#c07890" opacity="0.85" transform="rotate(36 100 100)"/>
-                <ellipse cx="100" cy="58" rx="14" ry="28" fill="#d498b0" opacity="0.85" transform="rotate(72 100 100)"/>
-                <ellipse cx="100" cy="58" rx="14" ry="28" fill="#c07890" opacity="0.85" transform="rotate(108 100 100)"/>
-                <ellipse cx="100" cy="58" rx="14" ry="28" fill="#d498b0" opacity="0.85" transform="rotate(144 100 100)"/>
-                <ellipse cx="100" cy="58" rx="14" ry="28" fill="#c07890" opacity="0.85" transform="rotate(180 100 100)"/>
-                <ellipse cx="100" cy="58" rx="14" ry="28" fill="#d498b0" opacity="0.85" transform="rotate(216 100 100)"/>
-                <ellipse cx="100" cy="58" rx="14" ry="28" fill="#c07890" opacity="0.85" transform="rotate(252 100 100)"/>
-                <ellipse cx="100" cy="58" rx="14" ry="28" fill="#d498b0" opacity="0.85" transform="rotate(288 100 100)"/>
-                <ellipse cx="100" cy="58" rx="14" ry="28" fill="#c07890" opacity="0.85" transform="rotate(324 100 100)"/>
-                <circle cx="100" cy="100" r="22" fill="#f0d0a0"/>
-                <circle cx="100" cy="100" r="14" fill="#e0b870"/>
-                <circle cx="100" cy="100" r="8" fill="#c89040"/>
-              </g>
-            </svg>
-          </div>
+          <img class="slide-img" src="https://images.unsplash.com/photo-1444930694458-01babf71870c?w=800&q=80" alt="Flores Exóticas" loading="lazy">
         </div>
         <div class="slide-info">
           <p class="slide-cat">Exótico</p>
@@ -905,7 +980,17 @@
         </div>
       </div>
 
-    </div><!-- track -->
+      <div class="carousel-slide" data-title="Centro de Mesa">
+        <div class="slide-img-wrap">
+          <img class="slide-img" src="https://images.unsplash.com/photo-1522057306606-a80029f80f86?w=800&q=80" alt="Centro de Mesa" loading="lazy">
+        </div>
+        <div class="slide-info">
+          <p class="slide-cat">Eventos</p>
+          <h3 class="slide-title">Centro de Mesa</h3>
+        </div>
+      </div>
+
+    </div>
   </div>
   <div class="carousel-dots" id="carouselDots"></div>
 </div>
@@ -916,8 +1001,8 @@
     <div class="section-label fade-in">Lo que ofrecemos</div>
     <h2 class="section-title fade-in">Servicios<br><em>Florales</em></h2>
     <p class="section-body fade-in">
-      Desde el arreglo más íntimo hasta la decoración más grandiosa, 
-      en Lia transformamos cada flor en una experiencia sensorial 
+      Desde el arreglo más íntimo hasta la decoración más grandiosa,
+      en Lia transformamos cada flor en una experiencia sensorial
       única e irrepetible.
     </p>
     <div class="about-stats fade-in">
@@ -953,11 +1038,59 @@
     </div>
     <div class="service-card fade-in">
       <span class="service-icon">🚚</span>
-      <p class="service-name">Envíos</p>
+      <p class="service-name">Envíos a Domicilio</p>
       <p class="service-desc">Llevamos la belleza de nuestras flores directamente a la puerta de tus seres queridos.</p>
     </div>
   </div>
 </div>
+
+<!-- PACKAGES -->
+<section class="packages" id="paquetes">
+  <div class="section-label fade-in">Precios y paquetes</div>
+  <h2 class="section-title fade-in">Encuentra tu<br>paquete ideal</h2>
+  <p class="section-body fade-in">Precios accesibles sin comprometer la calidad. Todos los paquetes incluyen asesoría personalizada.</p>
+  <div class="packages-grid">
+    <div class="pkg-card fade-in">
+      <p class="pkg-name">Esencial</p>
+      <p class="pkg-price">Desde $350 <span>MXN</span></p>
+      <ul class="pkg-features">
+        <li>Bouquet de temporada</li>
+        <li>Hasta 15 flores</li>
+        <li>1 tipo de flor principal</li>
+        <li>Empaque regalo</li>
+        <li>Tarjeta personalizada</li>
+      </ul>
+      <a href="#contacto" class="pkg-btn">Solicitar</a>
+    </div>
+    <div class="pkg-card featured fade-in">
+      <div class="pkg-badge">✦ Más popular</div>
+      <p class="pkg-name">Romantico</p>
+      <p class="pkg-price">Desde $750 <span>MXN</span></p>
+      <ul class="pkg-features">
+        <li>Bouquet premium</li>
+        <li>Hasta 30 flores mixtas</li>
+        <li>Flores importadas incluidas</li>
+        <li>Caja o florero decorativo</li>
+        <li>Envío a domicilio incluido</li>
+        <li>Tarjeta + chocolates</li>
+      </ul>
+      <a href="#contacto" class="pkg-btn">Solicitar</a>
+    </div>
+    <div class="pkg-card fade-in">
+      <p class="pkg-name">Eventos</p>
+      <p class="pkg-price">Cotización <span>personalizada</span></p>
+      <ul class="pkg-features">
+        <li>Decoración completa del evento</li>
+        <li>Centros de mesa ilimitados</li>
+        <li>Arcos y estructuras florales</li>
+        <li>Bouquet nupcial + boutonnière</li>
+        <li>Coordinación el día del evento</li>
+        <li>Asesoría de diseño floral</li>
+      </ul>
+      <a href="#contacto" class="pkg-btn">Solicitar cotización</a>
+    </div>
+  </div>
+</section>
 
 <!-- OCCASIONS -->
 <section class="occasions" id="ocasiones">
@@ -973,6 +1106,35 @@
   </div>
 </section>
 
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="testimonios">
+  <div class="section-label fade-in">Lo que dicen de nosotros</div>
+  <h2 class="section-title fade-in">Clientes que<br>nos inspiran</h2>
+  <div class="testi-grid">
+    <div class="testi-card fade-in">
+      <div class="testi-quote">"</div>
+      <p class="testi-text">Lia decoró mi boda y superó todas mis expectativas. Cada detalle fue perfecto, los colores eran exactamente los que soñé. ¡Mis invitados no paraban de preguntar quién hizo las flores!</p>
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-name">Sofía M.</p>
+      <p class="testi-occasion">Boda · Hermosillo 2024</p>
+    </div>
+    <div class="testi-card fade-in">
+      <div class="testi-quote">"</div>
+      <p class="testi-text">Le encargué el bouquet de quinceañera de mi hija y quedó hermoso. El arreglo duró más de una semana fresco. Sin duda el mejor servicio floral de Hermosillo. 100% recomendada.</p>
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-name">Carmen R.</p>
+      <p class="testi-occasion">Quinceañera · Hermosillo 2024</p>
+    </div>
+    <div class="testi-card fade-in">
+      <div class="testi-quote">"</div>
+      <p class="testi-text">Pedí flores para sorprender a mi esposa y llegaron a tiempo y preciosas. El servicio de WhatsApp es muy rápido y me ayudaron a escoger el arreglo perfecto. ¡Gracias Lia!</p>
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-name">Roberto H.</p>
+      <p class="testi-occasion">Aniversario · Hermosillo 2025</p>
+    </div>
+  </div>
+</section>
+
 <!-- ABOUT -->
 <section class="about" id="nosotros">
   <div class="about-visual fade-in">
@@ -981,7 +1143,6 @@
     <div class="about-ring"></div>
     <div class="about-center">
       <svg viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
-        <!-- Simple elegant flower -->
         <g transform="translate(50,65)">
           <ellipse cx="0" cy="-22" rx="10" ry="20" fill="#c87898" opacity="0.8"/>
           <ellipse cx="0" cy="-22" rx="10" ry="20" fill="#d898b8" opacity="0.8" transform="rotate(60 0 0)"/>
@@ -1000,13 +1161,13 @@
     <div class="section-label fade-in">Nuestra historia</div>
     <h2 class="section-title fade-in">Pasión que florece<br>con el tiempo</h2>
     <p class="section-body fade-in">
-      Lia nació del amor por las flores y el deseo de crear momentos 
-      memorables. Cada arreglo es una obra de arte diseñada con cuidado, 
+      Lia nació del amor por las flores y el deseo de crear momentos
+      memorables. Cada arreglo es una obra de arte diseñada con cuidado,
       usando las flores más frescas y de la más alta calidad.
     </p>
     <p class="section-body fade-in" style="margin-top: 1.2rem;">
-      Nuestra misión es sencilla: hacer que cada ocasión sea extraordinaria 
-      a través de la belleza natural de las flores, con un toque personal 
+      Nuestra misión es sencilla: hacer que cada ocasión sea extraordinaria
+      a través de la belleza natural de las flores, con un toque personal
       que hace la diferencia.
     </p>
     <div style="margin-top: 2.5rem;">
@@ -1021,7 +1182,7 @@
   <p class="cta-sub fade-in">Déjanos hacer que florezca</p>
   <div class="cta-actions fade-in">
     <a href="#contacto" class="btn-primary">Solicitar cotización</a>
-    <a href="https://wa.me/521234567890" class="btn-secondary">WhatsApp</a>
+    <a href="https://wa.me/526620000000?text=Hola%20Lia!%20Me%20gustar%C3%ADa%20cotizar%20para%20mi%20evento%20%F0%9F%8C%B8" target="_blank" class="btn-secondary">WhatsApp</a>
   </div>
 </div>
 
@@ -1041,14 +1202,18 @@
       <span class="contact-icon">📱</span>
       <div>
         <p class="contact-detail-label">WhatsApp</p>
-        <p class="contact-detail-val">+52 (662) 000-0000</p>
+        <p class="contact-detail-val">
+          <a href="https://wa.me/526620000000" target="_blank" style="color:var(--pink-light);text-decoration:none;">+52 (662) 000-0000</a>
+        </p>
       </div>
     </div>
     <div class="contact-item fade-in">
       <span class="contact-icon">📸</span>
       <div>
         <p class="contact-detail-label">Instagram</p>
-        <p class="contact-detail-val">@lia.floreria</p>
+        <p class="contact-detail-val">
+          <a href="https://instagram.com/lia.floreria" target="_blank" style="color:var(--pink-light);text-decoration:none;">@lia.floreria</a>
+        </p>
       </div>
     </div>
     <div class="contact-item fade-in">
@@ -1062,72 +1227,89 @@
   <div class="contact-form fade-in">
     <h3 class="form-title">Envíanos un mensaje</h3>
     <div class="form-row">
-      <label>Nombre</label>
-      <input type="text" placeholder="Tu nombre completo">
+      <label>Nombre *</label>
+      <input type="text" id="f-nombre" placeholder="Tu nombre completo">
+      <p class="form-error-msg" id="err-nombre">Por favor ingresa tu nombre</p>
     </div>
     <div class="form-row">
-      <label>Teléfono / WhatsApp</label>
-      <input type="tel" placeholder="+52 (662) 000-0000">
+      <label>Teléfono / WhatsApp *</label>
+      <input type="tel" id="f-telefono" placeholder="+52 (662) 000-0000">
+      <p class="form-error-msg" id="err-telefono">Por favor ingresa tu teléfono</p>
     </div>
     <div class="form-row">
-      <label>Tipo de ocasión</label>
-      <select>
+      <label>Tipo de ocasión *</label>
+      <select id="f-ocasion">
         <option value="" disabled selected>Selecciona una opción</option>
         <option>Boda</option>
         <option>Quinceañera</option>
         <option>Cumpleaños</option>
         <option>Bautizo</option>
+        <option>Aniversario</option>
         <option>Evento corporativo</option>
         <option>Arreglo personal</option>
         <option>Otro</option>
       </select>
+      <p class="form-error-msg" id="err-ocasion">Por favor selecciona una opción</p>
     </div>
     <div class="form-row">
       <label>Mensaje</label>
-      <textarea rows="4" placeholder="Cuéntanos sobre tu evento o lo que necesitas..."></textarea>
+      <textarea id="f-mensaje" rows="4" placeholder="Cuéntanos sobre tu evento o lo que necesitas..."></textarea>
     </div>
-    <button class="btn-primary" style="width:100%;padding:1.1rem;font-size:0.72rem;letter-spacing:0.22em;">
-      Enviar mensaje
+    <button class="btn-primary" id="sendBtn" style="width:100%;padding:1.1rem;font-size:0.72rem;letter-spacing:0.22em;">
+      Enviar por WhatsApp
     </button>
   </div>
 </section>
 
+<!-- MAP -->
+<div class="map-section">
+  <iframe
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d108992.70459684617!2d-110.9786867!3d29.0729673!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x86ce84268a5b5525%3A0x38da73fdcddb78c1!2sHermosillo%2C%20Sonora!5e0!3m2!1ses!2smx!4v1700000000000"
+    allowfullscreen="" loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade"
+    title="Ubicación Lia Florería - Hermosillo">
+  </iframe>
+</div>
+
 <!-- FOOTER -->
 <footer>
   <a href="#" class="footer-logo">Lia</a>
-  <p class="footer-copy">&copy; 2025 Lia Florería y Eventos · Todos los derechos reservados</p>
+  <p class="footer-copy">&copy; <span id="yr"></span> Lia Florería y Eventos · Hermosillo, Sonora</p>
   <div class="footer-socials">
-    <a href="#" class="soc-btn" title="Instagram">𝐈</a>
-    <a href="#" class="soc-btn" title="Facebook">𝐅</a>
-    <a href="#" class="soc-btn" title="WhatsApp">𝐖</a>
+    <a href="https://instagram.com/lia.floreria" target="_blank" class="soc-btn" title="Instagram">𝐈</a>
+    <a href="https://facebook.com" target="_blank" class="soc-btn" title="Facebook">𝐅</a>
+    <a href="https://wa.me/526620000000" target="_blank" class="soc-btn" title="WhatsApp">𝐖</a>
   </div>
 </footer>
 
 <script>
+  // ── Year
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
   // ── Cursor
   const cur = document.getElementById('cursor');
   const curR = document.getElementById('cursorRing');
   let mx=0, my=0, rx=0, ry=0;
-  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
-  (function ani() {
-    cur.style.left = mx+'px'; cur.style.top = my+'px';
-    rx += (mx-rx)*0.12; ry += (my-ry)*0.12;
-    curR.style.left = rx+'px'; curR.style.top = ry+'px';
+  document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; });
+  (function ani(){
+    cur.style.left=mx+'px'; cur.style.top=my+'px';
+    rx+=(mx-rx)*0.12; ry+=(my-ry)*0.12;
+    curR.style.left=rx+'px'; curR.style.top=ry+'px';
     requestAnimationFrame(ani);
   })();
+
+  // ── Nav scroll effect
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 60);
+  });
 
   // ── Petals
   const pc = document.getElementById('petals');
   for(let i=0; i<18; i++){
     const p = document.createElement('div');
     p.className = 'petal';
-    p.style.cssText = `
-      --size:${6+Math.random()*12}px;
-      --dur:${8+Math.random()*12}s;
-      --delay:${Math.random()*15}s;
-      --left:${Math.random()*100}%;
-      --rot:${Math.random()*360}deg;
-    `;
+    p.style.cssText = `--size:${6+Math.random()*12}px;--dur:${8+Math.random()*12}s;--delay:${Math.random()*15}s;--left:${Math.random()*100}%;--rot:${Math.random()*360}deg;`;
     pc.appendChild(p);
   }
 
@@ -1135,44 +1317,122 @@
   const track = document.getElementById('carouselTrack');
   const slides = track.children;
   const dotsEl = document.getElementById('carouselDots');
-  let cur_s = 0;
+  let curSlide = 0;
   const total = slides.length;
   const gap = 24;
 
-  function getSlideW(){ return slides[0] ? slides[0].offsetWidth + gap : 404; }
-
-  // Build dots
-  for(let i=0;i<total;i++){
+  function getW(){ return slides[0] ? slides[0].offsetWidth + gap : 404; }
+  for(let i=0; i<total; i++){
     const d = document.createElement('div');
-    d.className = 'dot' + (i===0?' active':'');
-    d.addEventListener('click',()=>goTo(i));
+    d.className = 'dot'+(i===0?' active':'');
+    d.addEventListener('click', ()=>goTo(i));
     dotsEl.appendChild(d);
   }
-
   function goTo(idx){
-    cur_s = Math.max(0, Math.min(idx, total-1));
-    track.style.transform = `translateX(-${cur_s * getSlideW()}px)`;
-    document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i===cur_s));
+    curSlide = Math.max(0, Math.min(idx, total-1));
+    track.style.transform = `translateX(-${curSlide * getW()}px)`;
+    document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i===curSlide));
   }
+  document.getElementById('prevBtn').addEventListener('click', ()=>goTo(curSlide-1));
+  document.getElementById('nextBtn').addEventListener('click', ()=>goTo(curSlide+1));
 
-  document.getElementById('prevBtn').addEventListener('click', ()=> goTo(cur_s-1));
-  document.getElementById('nextBtn').addEventListener('click', ()=> goTo(cur_s+1));
-
-  // Touch / drag
-  let startX=0, dragging=false;
-  track.addEventListener('mousedown', e=>{ startX=e.clientX; dragging=true; });
-  track.addEventListener('mousemove', e=>{ if(!dragging) return; });
-  track.addEventListener('mouseup', e=>{ if(!dragging) return; dragging=false; const dx=e.clientX-startX; if(Math.abs(dx)>50) goTo(cur_s+(dx<0?1:-1)); });
+  let startX=0;
   track.addEventListener('touchstart', e=>{ startX=e.touches[0].clientX; });
-  track.addEventListener('touchend', e=>{ const dx=e.changedTouches[0].clientX-startX; if(Math.abs(dx)>50) goTo(cur_s+(dx<0?1:-1)); });
+  track.addEventListener('touchend', e=>{ const dx=e.changedTouches[0].clientX-startX; if(Math.abs(dx)>50) goTo(curSlide+(dx<0?1:-1)); });
 
-  // Auto-advance
-  setInterval(()=>goTo((cur_s+1)%total), 5000);
+  let dragStart=0, isDragging=false;
+  track.addEventListener('mousedown', e=>{ dragStart=e.clientX; isDragging=true; });
+  document.addEventListener('mouseup', e=>{ if(!isDragging) return; isDragging=false; const dx=e.clientX-dragStart; if(Math.abs(dx)>50) goTo(curSlide+(dx<0?1:-1)); });
 
-  // ── Fade-in on scroll
+  setInterval(()=>goTo((curSlide+1)%total), 5500);
+
+  // ── Lightbox
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lbImg');
+  const lbCap = document.getElementById('lbCaption');
+
+  document.querySelectorAll('.carousel-slide').forEach(slide => {
+    slide.addEventListener('click', () => {
+      const img = slide.querySelector('.slide-img');
+      const title = slide.dataset.title;
+      lbImg.src = img.src.replace('w=800', 'w=1400');
+      lbCap.textContent = title;
+      lb.classList.add('open');
+    });
+  });
+  document.getElementById('lbClose').addEventListener('click', ()=>lb.classList.remove('open'));
+  lb.addEventListener('click', e=>{ if(e.target===lb) lb.classList.remove('open'); });
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') lb.classList.remove('open'); });
+
+  // ── Form → WhatsApp
+  const phoneNumber = '526620000000'; // ← CAMBIA AQUÍ el número real
+
+  document.getElementById('sendBtn').addEventListener('click', () => {
+    const nombre   = document.getElementById('f-nombre');
+    const telefono = document.getElementById('f-telefono');
+    const ocasion  = document.getElementById('f-ocasion');
+    const mensaje  = document.getElementById('f-mensaje');
+    let valid = true;
+
+    // Validation
+    [
+      [nombre,   'err-nombre'],
+      [telefono, 'err-telefono'],
+      [ocasion,  'err-ocasion']
+    ].forEach(([field, errId]) => {
+      const err = document.getElementById(errId);
+      if(!field.value.trim()){
+        field.classList.add('error');
+        err.classList.add('show');
+        valid = false;
+      } else {
+        field.classList.remove('error');
+        err.classList.remove('show');
+      }
+    });
+
+    if(!valid) return;
+
+    // Build WhatsApp message
+    const msg = encodeURIComponent(
+      `🌸 *Hola Lia Florería!*\n\n` +
+      `*Nombre:* ${nombre.value.trim()}\n` +
+      `*Teléfono:* ${telefono.value.trim()}\n` +
+      `*Ocasión:* ${ocasion.value}\n` +
+      (mensaje.value.trim() ? `*Mensaje:* ${mensaje.value.trim()}\n` : '') +
+      `\n_Mensaje enviado desde el sitio web_`
+    );
+
+    window.open(`https://wa.me/${phoneNumber}?text=${msg}`, '_blank');
+
+    // Toast
+    const toast = document.getElementById('toast');
+    toast.classList.add('show');
+    setTimeout(()=>toast.classList.remove('show'), 3500);
+
+    // Reset
+    [nombre, telefono, mensaje].forEach(f=>f.value='');
+    ocasion.selectedIndex=0;
+  });
+
+  // Remove error on input
+  ['f-nombre','f-telefono','f-ocasion'].forEach(id => {
+    document.getElementById(id).addEventListener('change', function(){
+      this.classList.remove('error');
+      const errId = 'err-' + id.replace('f-','');
+      document.getElementById(errId)?.classList.remove('show');
+    });
+    document.getElementById(id).addEventListener('input', function(){
+      this.classList.remove('error');
+      const errId = 'err-' + id.replace('f-','');
+      document.getElementById(errId)?.classList.remove('show');
+    });
+  });
+
+  // ── Fade-in observer
   const obs = new IntersectionObserver(entries=>{
     entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold:0.12 });
+  }, { threshold: 0.1 });
   document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
 </script>
 </body>
